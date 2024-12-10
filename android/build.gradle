@@ -23,6 +23,19 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 apply plugin: 'com.google.protobuf'
 
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.17.3'  // プロトコルコンパイラの指定
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {
+                option 'lite'  // 必要なら gRPC オプションを指定
+            }
+        }
+    }
+}
+
 android {
     namespace 'com.ingra.flutter_blue'
     compileSdkVersion 30
